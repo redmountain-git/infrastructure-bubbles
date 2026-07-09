@@ -1,0 +1,5 @@
+deployment:
+  tasks:
+    - source /home/redmmdaf/.deploy/infrastructure-bubbles.env
+    - test -n "$DEPLOYPATH"
+    - /bin/cp -a src/web/. $DEPLOYPATH
