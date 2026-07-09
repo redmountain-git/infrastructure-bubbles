@@ -1,4 +1,4 @@
 ---
 deployment:
   tasks:
-    - source /.deploy/infrastructure-bubbles.env
+    - /bin/cp /src/web/index.html /public_html/
