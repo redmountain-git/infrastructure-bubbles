@@ -1,3 +1,4 @@
+---
 deployment:
   tasks:
     - source /home/redmmdaf/.deploy/infrastructure-bubbles.env
