@@ -1,4 +1,12 @@
 ---
 deployment:
   tasks:
-    - /bin/cp /src/web/index.html /public_html/
+    - LOG_FILE="${HOME}/.cpanel-deploy.log"
+    - echo "=== deployment started $(date) ===" >> "$LOG_FILE" 2>&1
+    - set -x >> "$LOG_FILE" 2>&1
+    - if [ -f /.deploy/infrastructure-bubbles.env ]; then . /.deploy/infrastructure-bubbles.env >> "$LOG_FILE" 2>&1; else echo "Missing env file: /.deploy/infrastructure-bubbles.env" >> "$LOG_FILE" 2>&1; exit 1; fi
+    - echo "DEPLOYPATH=$DEPLOYPATH" >> "$LOG_FILE" 2>&1
+    - test -n "$DEPLOYPATH" >> "$LOG_FILE" 2>&1
+    - mkdir -p "$DEPLOYPATH" >> "$LOG_FILE" 2>&1
+    - /bin/cp -a src/web/. "$DEPLOYPATH/" >> "$LOG_FILE" 2>&1
+    - echo "=== deployment completed $(date) ===" >> "$LOG_FILE" 2>&1
